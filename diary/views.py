@@ -1,12 +1,7 @@
 from django.http.response import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Entry
-
-# diaries = [
-#     {'id' : 1, 'title' : 'My Day'},
-#     {'id' : 2, 'title' : 'Uhhhh'},
-#     {'id' : 1, 'title' : 'Building a django CRUD app'},
-# ]
+from .forms import EntryForm
 
 # Create your views here.
 def index(request):
@@ -14,7 +9,17 @@ def index(request):
     return render(request, 'diary/home.html', {'diary' : diaries})
 
 def add_note(request):
-    return render(request, 'diary/addNote.html')
+    upload = EntryForm()
+    if request.method == 'POST':
+        upload = EntryForm(request.POST, request.FILES)
+        if upload.is_valid() :
+            upload.save()
+            print(request.POST)
+            return redirect('diary:index')
+        else:
+            return HttpResponse("""your form is wrong, reload on <a href = "{{ url : 'index'}}">reload</a>""")
+    # else:
+    return render(request, 'diary/addNote.html', {'form' : upload})
 
 def notes(request, pk):
     diaries = Entry.objects.get(id = pk)

@@ -12,9 +12,9 @@ def add_note(request):
     upload = EntryForm()
     if request.method == 'POST':
         upload = EntryForm(request.POST, request.FILES)
+        print(request.POST)
         if upload.is_valid() :
             upload.save()
-            print(request.POST)
             return redirect('diary:index')
         else:
             return HttpResponse("""your form is wrong, reload on <a href = "{{ url : 'index'}}">reload</a>""")

@@ -4,7 +4,7 @@ from django.db import models
 class Entry(models.Model):
     title = models.CharField(max_length= 200)
     description = models.TextField(default = '')
-    # picture = models.ImageField(upload_to = 'static/img/images')
+    picture = models.ImageField(upload_to = 'static/img/images')
     updated = models.DateTimeField(auto_now = True)
     created = models.DateTimeField(auto_now_add = True)
 

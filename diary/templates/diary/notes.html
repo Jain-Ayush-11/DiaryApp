@@ -7,6 +7,7 @@
 <br>
 <h4>{{entry.description}}</h4>
 <!-- <img src="{{ entry.picture.url }}" style="width: 500px; height: 500px;"> -->
+<h6>created on -- {{entry.created}} | last updated -- {{entry.updated}}</h6>
 </div>
 <a href="{% url 'diary:update' entry.id %}"><button> edit </button></a>
 <a href="{% url 'diary:delete' entry.id %}"><button> delete </button></a>

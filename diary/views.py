@@ -35,7 +35,7 @@ def update(request, pk):
         diaries = Entry.objects.get(id = pk)
     except Entry.DoesNotExist:
         return redirect('diary:index')
-    upload = EntryForm(request.POST, instance=diaries)
+    upload = EntryForm(instance=diaries)
     if upload.is_valid() :
         upload.save()
         return redirect('diary:index')

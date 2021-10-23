@@ -4,4 +4,12 @@
 
 <h1>Hi!! :D</h1>
 
+{% for entry in diary %}
+
+<h5><a href="{% url 'diary:notes' entry.id %}"> {{entry.title}} </a></h5>
+
+{% endfor %}
+
+<a href="{% url 'diary:addnote' %}"><button> + Note </button></a>
+
 {% endblock %}

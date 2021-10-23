@@ -1,0 +1,13 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<h1>{{entry.title}}</h1>
+<br>
+<div>
+<h4>{{entry.description}}</h4>
+<img src="{{ entry.picture.url }}" style="width: 500px; height: 500px;">
+</div>
+
+
+{% endblock %}

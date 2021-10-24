@@ -2,14 +2,21 @@
 
 {% block content %}
 
-<h1>Hi!! :D</h1>
+<h1>MyDiary</h1>
 
 {% for entry in diary %}
 
-<h5><a href="{% url 'diary:notes' entry.id %}"> {{entry.title}} </a></h5>
-
+<hr>
+<h3><a href="{% url 'diary:notes' entry.id %}"> {{entry.title}} </a></h3>
+<h6>
+    {% if entry.isbookmark %}
+        Bookmarked
+    {% endif %}
+</h6>
 {% endfor %}
 
+<hr>
 <a href="{% url 'diary:addnote' %}"><button> + Note </button></a>
+<a href="{% url 'diary:bookmarks' %}"><button> Bookmarks </button></a>
 
 {% endblock %}

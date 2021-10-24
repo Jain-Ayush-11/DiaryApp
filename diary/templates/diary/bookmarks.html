@@ -1,0 +1,18 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<h1>Bookmarks</h1>
+
+{% for entry in diary %}
+
+{% if entry.isbookmark %}
+
+<h5><a href="{% url 'diary:notes' entry.id %}"> {{entry.title}} </a></h5>
+
+{% endif %}
+
+{% endfor %}
+<a href="{% url 'diary:index' %}"><button> Home </button></a>
+
+{% endblock %}

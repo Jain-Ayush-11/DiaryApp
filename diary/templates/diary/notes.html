@@ -12,7 +12,7 @@
 <a href="{% url 'diary:update' entry.id %}"><button> edit </button></a>
 <a href="{% url 'diary:delete' entry.id %}"><button> delete </button></a>
 {% if entry.isbookmark %}
-<a href="{% url 'diary:unBookmark' entry.id %}"><button> remove from bookmarks </button></a>
+<a href="{% url 'diary:isBookmark' entry.id %}"><button> remove from bookmarks </button></a>
 {% else %}
 <a href="{% url 'diary:isBookmark' entry.id %}"><button> bookmark it </button></a>
 {% endif %}

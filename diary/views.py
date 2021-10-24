@@ -2,9 +2,21 @@ from django.http.response import HttpResponse
 from django.shortcuts import render, redirect
 from .models import Entry
 from .forms import EntryForm
+from django.views.generic.list import ListView
 import os
+from django.db.models import Case, Value, When
 
 # Create your views here.
+# class Index(ListView):
+#     model = Entry
+#     template_name = 'home.html'
+    
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         context['diary'] = Entry.objects.all
+#         return context
+
+
 def index(request):
     diaries = Entry.objects.all()
     return render(request, 'diary/home.html', {'diary' : diaries})
@@ -51,15 +63,15 @@ def bookmark(request):
 
 def isBookmark(request, pk):
     entry = Entry.objects.filter(id = pk)
-    entry.update(isbookmark = True)
+    entry.update(isbookmark = Case(When(isbookmark=True, then=Value(False)),When(isbookmark=False, then=Value(True))))
     diaries = Entry.objects.all()
     return render(request, 'diary/bookmarks.html', {'diary' : diaries})
 
-def unBookmark(request, pk):
-    entry = Entry.objects.filter(id = pk)
-    entry.update(isbookmark = False)
+def task(request, pk):
+    task = Entry.objects.filter(id = pk)
+    task.update(completed = Case(When(completed=True, then=Value(False)),When(completed=False, then=Value(True))))
     diaries = Entry.objects.all()
-    return render(request, 'diary/bookmarks.html', {'diary' : diaries})
+    return redirect('diary:index')
 
 def notes(request, pk):
     diaries = Entry.objects.get(id = pk)

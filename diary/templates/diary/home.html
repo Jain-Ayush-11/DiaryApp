@@ -7,12 +7,19 @@
 {% for entry in diary %}
 
 <hr>
+{% if entry.completed %}
+<h3><a href="{% url 'diary:notes' entry.id %}" style="text-decoration: line-through;"> {{entry.title}} </a></h3>
+<a href="{% url 'diary:task' entry.id %}"><button> Incomplete </button></a>
+{% else %}
 <h3><a href="{% url 'diary:notes' entry.id %}"> {{entry.title}} </a></h3>
+<a href="{% url 'diary:task' entry.id %}"><button> Completed </button></a>
+{% endif %}
 <h6>
     {% if entry.isbookmark %}
         Bookmarked
     {% endif %}
 </h6>
+<br>
 {% endfor %}
 
 <hr>

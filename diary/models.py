@@ -9,9 +9,10 @@ class Entry(models.Model):
     updated = models.DateTimeField(auto_now = True)
     created = models.DateTimeField(auto_now_add = True)
     isbookmark = models.BooleanField(default=False)
+    completed = models.BooleanField(default=False)
 
     class Meta:
-        ordering = ['-updated', '-created']
+        ordering = ['completed', '-updated', '-created']
 
     def __str__(self):
         return self.title

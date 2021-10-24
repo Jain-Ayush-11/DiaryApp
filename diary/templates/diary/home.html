@@ -2,28 +2,28 @@
 
 {% block content %}
 
-<h1>MyDiary</h1>
+    <h1>MyDiary</h1>
 
-{% for entry in diary %}
+    {% for entry in diary %}
 
-<hr>
-{% if entry.completed %}
-<h3><a href="{% url 'diary:notes' entry.id %}" style="text-decoration: line-through;"> {{entry.title}} </a></h3>
-<a href="{% url 'diary:task' entry.id %}"><button> Incomplete </button></a>
-{% else %}
-<h3><a href="{% url 'diary:notes' entry.id %}"> {{entry.title}} </a></h3>
-<a href="{% url 'diary:task' entry.id %}"><button> Completed </button></a>
-{% endif %}
-<h6>
-    {% if entry.isbookmark %}
-        Bookmarked
+    <hr>
+    {% if entry.completed %}
+    <h3><a href="{% url 'diary:notes' entry.id %}" style="text-decoration: line-through;"> {{entry.title}} </a></h3>
+    <a href="{% url 'diary:task' entry.id %}"><button class="btn btn-info"> Complete </button></a>
+    {% else %}
+    <h3><a href="{% url 'diary:notes' entry.id %}"> {{entry.title}} </a></h3>
+    <a href="{% url 'diary:task' entry.id %}"><button class="btn btn-info"> Incomplete </button></a>
     {% endif %}
-</h6>
-<br>
-{% endfor %}
+    <h6>
+        {% if entry.isbookmark %}
+            Bookmarked
+        {% endif %}
+    </h6>
+    <br>
+    {% endfor %}
 
-<hr>
-<a href="{% url 'diary:addnote' %}"><button> + Note </button></a>
-<a href="{% url 'diary:bookmarks' %}"><button> Bookmarks </button></a>
+    <hr>
+    <a href="{% url 'diary:addnote' %}"><button class="btn btn-info"> + Note </button></a>
+    <a href="{% url 'diary:bookmarks' %}"><button class="btn btn-info"> Bookmarks </button></a>
 
 {% endblock %}

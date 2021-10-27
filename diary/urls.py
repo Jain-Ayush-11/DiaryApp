@@ -1,6 +1,8 @@
 from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
+
+from DiaryApp.settings import STATIC_URL
                               
 from . import views
 
@@ -15,3 +17,6 @@ urlpatterns = [
     path('delete/<int:pk>/', views.delete, name='delete'),
     path('update/<int:pk>/', views.update, name='update'),
 ]
+
+urlpatterns += static(STATIC_URL, document_root = STATIC_URL)
+# urlpatterns = format_suffix_patterns(urlpatterns)

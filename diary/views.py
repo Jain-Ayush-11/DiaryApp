@@ -1,6 +1,7 @@
+from django.db.models.expressions import Col
 from django.http.response import HttpResponse
 from django.shortcuts import render, redirect
-from .models import Entry
+from .models import Collection, Entry
 from .forms import EntryForm
 from django.views.generic.list import ListView
 import os
@@ -19,7 +20,13 @@ from django.db.models import Case, Value, When
 
 def index(request):
     diaries = Entry.objects.all()
-    return render(request, 'diary/home.html', {'diary' : diaries})
+    collection = Collection.objects.all()
+    return render(request, 'diary/home.html', {'diary' : diaries , 'collection' : collection})
+
+def viewNote(request, pk):
+    diaries = Entry.objects.get(id = pk)
+    collection = diaries.collection
+    return render(request, 'diary/notes.html', {'entry' : diaries , 'collection' : collection})
 
 def add_note(request):
     upload = EntryForm()
@@ -73,6 +80,8 @@ def task(request, pk):
     diaries = Entry.objects.all()
     return redirect('diary:index')
 
-def notes(request, pk):
-    diaries = Entry.objects.get(id = pk)
-    return render(request, 'diary/notes.html', {'entry' : diaries})
+# For Collections Page
+def viewCollection(request, pk):
+    collection = Collection.objects.get(id = pk)
+    notes = Entry.objects.filter(collection = collection)
+    return render(request, 'diary/collections.html', {'diary' : notes , 'collection' : collection})

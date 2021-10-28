@@ -2,7 +2,7 @@
 
 {% block content %}
 
-    <h1>MyDiary</h1>
+    <h2>{{collection.name}}</h2>
 
     {% for entry in diary %}
 
@@ -21,19 +21,5 @@
     </h6>
     <br>
     {% endfor %}
-
-    <hr>
-
-    <div style="text-align: left; margin-left: 30px;">
-        <h4 style="display: inline; text-align: justify;">Collections: </h4>&ensp;
-        {% for c in collection %}
-        <a href="{% url 'diary:viewCollection' c.id %}"><button class="btn btn-info"> {{c.name}} </button></a>
-        &nbsp;
-        {% endfor %}
-    </div>
-
-    <hr>
-    <a href="{% url 'diary:addnote' %}"><button class="btn btn-info"> + Note </button></a>
-    <a href="{% url 'diary:bookmarks' %}"><button class="btn btn-info"> Bookmarks </button></a>
 
 {% endblock %}

@@ -6,7 +6,8 @@
 <h1>{{entry.title}}</h1>
 <br>
 <h4>{{entry.description}}</h4>
-<img src="{{ entry.picture.url }}" style="width:400px; height: 400px;">
+<img src="{{ entry.picture.url }}" style="width:400px; height: 400px;"> <br><br>
+<h4>Belongs To - {% for collection in entry.collection.all %}  {{collection.name}}, {% endfor %} </h4> <br>
 <h6>created on -- {{entry.created}} | last updated -- {{entry.updated}}</h6>
 </div>
 <a href="{% url 'diary:update' entry.id %}"><button> edit </button></a>

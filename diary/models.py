@@ -1,6 +1,12 @@
 from django.db import models
 from django.db.models.deletion import CASCADE
 
+class Collection(models.Model):
+    name = models.CharField(max_length = 200, null=True, blank=True)
+
+    def __str__(self):
+        return self.name
+
 # Create your models here.
 class Entry(models.Model):
     title = models.CharField(max_length= 200)
@@ -11,12 +17,10 @@ class Entry(models.Model):
     created = models.DateTimeField(auto_now_add = True)
     isbookmark = models.BooleanField(default=False)
     completed = models.BooleanField(default=False)
+    collection = models.ManyToManyField(Collection)
 
     class Meta:
         ordering = ['completed', '-updated', '-created']
 
     def __str__(self):
         return self.title
-
-# class Bookmarks(models.Model):
-#     entry = models.ForeignKey(Entry, on_delete=CASCADE)

@@ -1,8 +1,9 @@
+import collections
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import status
-from diary.models import Entry
-from .serializers import NoteSerializer
+from diary.models import Entry, Collection
+from .serializers import NoteSerializer, CollectionSerializer
 
 class NotesList(APIView):
     def get(self, request, format = None):
@@ -37,3 +38,9 @@ class NoteDetails(APIView):
         note = Entry.objects.get(id = pk)
         note.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+class CollectionList(APIView):
+    def get(self, request, format = None):
+        collection = Collection.objects.all()
+        serializer = CollectionSerializer(collection, many = True)
+        return Response(serializer.data)
